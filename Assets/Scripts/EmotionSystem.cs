@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EmotionSystem : MonoBehaviour
 {
@@ -18,13 +19,14 @@ public class EmotionSystem : MonoBehaviour
         Completed,
     }
 
-    public SpriteRenderer spriteDefault;
-    public SpriteRenderer spriteAngry;
-    public SpriteRenderer spriteSad;
-    public SpriteRenderer spriteSmile;
+    public RawImage view;
+    public Texture2D texDefault;
+    public Texture2D texAngry;
+    public Texture2D texSad;
+    public Texture2D texSmile;
     public float transitionScale;
 
-    Dictionary<EmotionKind, SpriteRenderer> sprites;
+    Dictionary<EmotionKind, Texture2D> tex;
     Queue<EmotionKind> queue;
     TransitionState transitionState;
     EmotionKind fromEmotionKind;
@@ -32,18 +34,15 @@ public class EmotionSystem : MonoBehaviour
 
     void Start()
     {
-        sprites = new Dictionary<EmotionKind, SpriteRenderer>
+        tex = new Dictionary<EmotionKind, Texture2D>
         {
-            { EmotionKind.Default, spriteDefault },
-            { EmotionKind.Angry, spriteAngry },
-            { EmotionKind.Sad, spriteSad },
-            { EmotionKind.Smile, spriteSmile }
+            { EmotionKind.Default, texDefault },
+            { EmotionKind.Angry, texAngry },
+            { EmotionKind.Sad, texSad },
+            { EmotionKind.Smile, texSmile }
         };
 
-        foreach (var sprite in sprites.Values)
-        {
-            sprite.color = Color.clear;
-        }
+        view.color = Color.clear;
 
         queue = new Queue<EmotionKind>();
     }
@@ -64,18 +63,19 @@ public class EmotionSystem : MonoBehaviour
 
         if (transitionState == TransitionState.FadeOut)
         {
-            var alpha = Mathf.Clamp01(sprites[fromEmotionKind].color.a - Time.deltaTime * transitionScale);
-            sprites[fromEmotionKind].color = new Color(1.0f, 1.0f, 1.0f, alpha);
+            var alpha = Mathf.Clamp01(view.color.a - Time.deltaTime * transitionScale);
+            view.color = new Color(1.0f, 1.0f, 1.0f, alpha);
             if (alpha == 0.0f)
             {
+                view.texture = tex[toEmotionKind];
                 transitionState = TransitionState.FadeIn;
             }
         }
 
         if (transitionState == TransitionState.FadeIn)
         {
-            var alpha = Mathf.Clamp01(sprites[toEmotionKind].color.a + Time.deltaTime * transitionScale);
-            sprites[toEmotionKind].color = new Color(1.0f, 1.0f, 1.0f, alpha);
+            var alpha = Mathf.Clamp01(view.color.a + Time.deltaTime * transitionScale);
+            view.color = new Color(1.0f, 1.0f, 1.0f, alpha);
             if (alpha == 1.0f)
             {
                 transitionState = TransitionState.Completed;
