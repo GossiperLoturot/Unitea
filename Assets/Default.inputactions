@@ -1,0 +1,74 @@
+{
+    "name": "Input",
+    "maps": [
+        {
+            "name": "Default",
+            "id": "f5780800-0fbd-4a04-ae45-6527bb8cdbc2",
+            "actions": [
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "16b76905-b83c-4605-a06a-7fd1b4dee4d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectNext",
+                    "type": "Button",
+                    "id": "ad26355b-b7b8-4edd-9c64-d52d9d5443ea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectPrev",
+                    "type": "Button",
+                    "id": "f1cdde84-b029-4845-b884-919a8c37e977",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7b505006-5830-42dd-b8ee-d013f07fd80f",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d954a7c1-0d6d-4102-87b4-780b9f94c189",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectNext",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a145010d-c30c-4539-b278-d098bddbb308",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectPrev",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
